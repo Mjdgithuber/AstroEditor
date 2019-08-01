@@ -1,2 +1,5 @@
 # Directories
 bin/
+
+# exclude saves
+assets/saves/
