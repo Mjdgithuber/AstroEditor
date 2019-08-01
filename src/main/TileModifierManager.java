@@ -30,6 +30,8 @@ public class TileModifierManager {
 	private static String transparent_block_path;
 	private static String teleporter_block_path;
 	
+	private static TileModifier CLEAR;
+	
 	static {
 		init();
 	}
@@ -54,11 +56,11 @@ public class TileModifierManager {
 			try{
 				String path = f.toString();
 				
-				if(path.endsWith("transparentModifier.png"))
+				if(path.endsWith("CLEAR.png"))
 					transparent_block_path = path;
-				else if(path.endsWith("solidModifier.png"))
+				else if(path.endsWith("SOLID.png"))
 					solid_block_path = path;
-				else if(path.endsWith("transporterModifier.png"))
+				else if(path.endsWith("TELEPORT.png"))
 					teleporter_block_path = path;
 				else
 					continue;

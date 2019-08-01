@@ -16,21 +16,6 @@ public class Parser extends DefaultHandler {
 
 	private World world;
 
-//	
-//	public static final void initiateSave(String[][] tiles){
-//		try {
-//			JFileChooser chooser = new JFileChooser("assets/saves");
-//			FileNameExtensionFilter filter = new FileNameExtensionFilter("Save Files", "sv");
-//			chooser.setFileFilter(filter);
-//			if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-//				System.out.println("You chose to save this file: " +
-//						chooser.getSelectedFile().getName());
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
 	
 	public Parser() {
 		try{

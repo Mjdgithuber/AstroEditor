@@ -7,14 +7,16 @@ public class TileModifier {
 	private ImageIcon image;
 	private String name;
 	private Action action;
+	private int regNum;
 	
 //	public Tile(ImageIcon image, String name){
 //		this.image = image;
 //		this.name = name;
 //	}
 	
-	public TileModifier(String name, Action action){
+	public TileModifier(String name, Action action, int regNum){
 		setName(name, action);
+		this.regNum = regNum;
 	}
 	
 	public ImageIcon getImage(){

@@ -84,6 +84,15 @@ public class TopPanel extends JPanel {
 			}
 		});
 		this.add(open);
+		
+		JButton blockReg = new JButton("Block Register");
+		blockReg.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		this.add(blockReg);
 	}
 	
 	public void refreshCoords(int x, int y){

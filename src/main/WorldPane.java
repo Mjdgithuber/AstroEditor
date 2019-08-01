@@ -58,7 +58,7 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 				for (int j = 0; j < tiles[0].length; j++){
 					tiles[i][j] = new Tile(TileManager.getVoidTilePath());
 					buildings[i][j] = new Building();
-					modifiers[i][j] = new TileModifier(transModPath, TileModifierManager.getModifierAction(transModPath));
+					modifiers[i][j] = new TileModifier(transModPath, TileModifierManager.getModifierAction(transModPath), 5);
 				}
 			inited = true;
 		}

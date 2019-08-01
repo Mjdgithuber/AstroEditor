@@ -22,8 +22,6 @@ import javax.swing.JPanel;
 public class OptionPanel extends JPanel {
 	
 	GridBagConstraints gbc = new GridBagConstraints();
-	//ArrayList<JButton> buttons = new ArrayList<JButton>();
-	//private ImageIcon img;
 	private String name = null;
 	private String tool;
 	private Action action;
@@ -38,11 +36,6 @@ public class OptionPanel extends JPanel {
 	}
 	
 	public OptionPanel(){
-//		Dimension size = getPreferredSize();
-//		size.width = 150;
-//		//size.height = 25;
-//		setPreferredSize(size);
-		
 		setBorder(BorderFactory.createTitledBorder("Selector"));
 		setLayout(new GridBagLayout());
 		gbc.gridx = 0;

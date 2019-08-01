@@ -39,7 +39,7 @@ public class TileManager {
 		for (File f : assets){
 			try{
 				String path = f.toString();
-				if(path.endsWith("void.png"))
+				if(path.endsWith("NULL.png"))
 					voidTilePath = path;
 				tileNames.add(path);				
 				tileImages.add(new ImageIcon(path));
