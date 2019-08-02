@@ -1,4 +1,4 @@
-package main;
+package panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,6 +18,14 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import main.Building;
+import main.Tile;
+import main.TileModifier;
+import main.World;
+import managers.BuildingManager;
+import managers.TileManager;
+import managers.TileModifierManager;
 
 public class WorldPane extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
@@ -53,12 +61,12 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 	
 	public void init(){
 		if(!inited){
-			String transModPath = TileModifierManager.getTransparentModPath();
+			String clearModPath = TileModifierManager.getClearModifierPath();
 			for (int i = 0; i < tiles.length; i++)
-				for (int j = 0; j < tiles[0].length; j++){
+				for (int j = 0; j < tiles[0].length; j++) {
 					tiles[i][j] = new Tile(TileManager.getVoidTilePath());
 					buildings[i][j] = new Building();
-					modifiers[i][j] = new TileModifier(transModPath, TileModifierManager.getModifierAction(transModPath), 5);
+					modifiers[i][j] = new TileModifier(clearModPath, TileModifierManager.getModifierAction(clearModPath));
 				}
 			inited = true;
 		}
@@ -86,6 +94,10 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		return tiles;
 	}
 	
+	public TileModifier[][] getTileModifiers() {
+		return modifiers;
+	}
+	
 	public Building[][] getBuildings(){
 		return buildings;
 	}
@@ -98,6 +110,7 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		xOffset=0;
 		yOffset=0;
 		tiles = w.getTiles();
+		modifiers = w.getModifiers();
 		buildings = w.getBuildings();
 		//TODO put in modifiers
 		repaint();
@@ -140,8 +153,6 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 
 		Graphics2D g = img.createGraphics();
 		Color oldColor = g.getColor();
-		// g.setPaint(Color.black);
-		// g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
 		for (int i = 0; i < tiles.length; i++)
 			for (int j = 0; j < tiles[0].length; j++) {

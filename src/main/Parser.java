@@ -12,6 +12,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import register.Register;
+
 public class Parser extends DefaultHandler {
 
 	private World world;
@@ -33,7 +35,7 @@ public class Parser extends DefaultHandler {
 				for(String s : n)
 					System.out.println(s);
 			
-			world = new World(tileNames, buildingNames);
+			world = new World(tileNames, tileModifiers, buildingNames);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -46,6 +48,7 @@ public class Parser extends DefaultHandler {
 	}
 
 	private String[][] tileNames = null;
+	private String[][] tileModifiers = null;
 	private String[][] buildingNames = null;
 	@Override
 	// A start tag is encountered.
@@ -59,12 +62,16 @@ public class Parser extends DefaultHandler {
 				int width = Integer.parseInt(attributes.getValue("width"));
 				int height = Integer.parseInt(attributes.getValue("height"));
 				tileNames = new String[width][height];
+				tileModifiers = new String[width][height];
 				buildingNames = new String[width][height];
 				break;
 			}
 			case "Tile": {
 				int x = Integer.parseInt(attributes.getValue("x"));
 				int y = Integer.parseInt(attributes.getValue("y"));
+				int modRegNum = Integer.parseInt(attributes.getValue("modifier_reg_num"));
+				tileModifiers[x][y] = Register.getModifierName(modRegNum);
+				System.out.println(tileModifiers[x][y]);
 				tileNames[x][y] = attributes.getValue("name");
 				break;
 			}

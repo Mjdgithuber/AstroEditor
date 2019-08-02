@@ -1,4 +1,4 @@
-package main;
+package managers;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -21,16 +21,24 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import main.Action;
+import main.TileModifier;
+
 public class TileModifierManager {
+	
+	public static final String pathToModifiers = "assets/tile_modifiers/";
 	
 	private static ArrayList<ImageIcon> tileModImages;
 	private static ArrayList<String> tileModNames;
 	
-	private static String solid_block_path;
-	private static String transparent_block_path;
-	private static String teleporter_block_path;
+	private static String CLEAR_MOD_NAME;
+	private static String SOLID_MOD_NAME;
+	private static String TELEPORT_MOD_NAME;
+	//private static String solid_block_path;
+	//private static String transparent_block_path;
+	//private static String teleporter_block_path;
 	
-	private static TileModifier CLEAR;
+	//private static TileModifier CLEAR;
 	
 	static {
 		init();
@@ -41,34 +49,41 @@ public class TileModifierManager {
 		return tileModImages.get(index);
 	}
 	
-	public static String getTransparentModPath(){
-		return transparent_block_path;
+	public static String getClearModifierPath(){
+		return CLEAR_MOD_NAME;
 	}
 	
 	private static void init() {
 		tileModImages = new ArrayList<ImageIcon>();
 		tileModNames = new ArrayList<String>();
 
-		final File assetFolder = new File("assets/tile_modifiers");
+		final File assetFolder = new File(pathToModifiers);
 		final File[] assets = assetFolder.listFiles();
 
 		for (File f : assets){
 			try{
 				String path = f.toString();
 				
-				if(path.endsWith("CLEAR.png"))
-					transparent_block_path = path;
-				else if(path.endsWith("SOLID.png"))
-					solid_block_path = path;
-				else if(path.endsWith("TELEPORT.png"))
-					teleporter_block_path = path;
+				// gets the image at the file path
+				tileModImages.add(new ImageIcon(path));
+				
+				// strip the .png and path off of file name
+				path = path.substring(pathToModifiers.length());
+				path = path.substring(0, path.length()-4);
+				
+				if(path.endsWith("CLEAR"))
+					CLEAR_MOD_NAME = path;
+				else if(path.endsWith("SOLID"))
+					SOLID_MOD_NAME = path;
+				else if(path.endsWith("TELEPORT"))
+					TELEPORT_MOD_NAME = path;
 				else
 					continue;
 				
+				System.out.println(path);
 				tileModNames.add(path);				
-				tileModImages.add(new ImageIcon(path));
-			}catch(Exception e){}
-			//System.out.println(f.toString());
+				
+			}catch(Exception e){ e.printStackTrace(); }
 		}
 	}
 	
@@ -81,11 +96,11 @@ public class TileModifierManager {
 	}
 	
 	public static Action getModifierAction(String path){
-		if(path.equals(solid_block_path))
+		if(path.equals(SOLID_MOD_NAME))
 			return new Action("solid_block");
-		else if(path.equals(transparent_block_path))
+		else if(path.equals(CLEAR_MOD_NAME))
 			return new Action("transparent_block");
-		else if(path.equals(teleporter_block_path)){
+		else if(path.equals(TELEPORT_MOD_NAME)){
 			return new Action(openTeleporterDialog());
 		}
 		

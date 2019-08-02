@@ -1,4 +1,4 @@
-package main;
+package panels;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -18,6 +18,11 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import main.Action;
+import managers.BuildingManager;
+import managers.TileManager;
+import managers.TileModifierManager;
 
 public class OptionPanel extends JPanel {
 	

@@ -12,6 +12,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import main.Tile;
+import main.TileModifier;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -101,6 +102,24 @@ public class Register {
 			}
 		}
 		return -1;
+	}
+	
+	public static int getModifierRegisterNumber(TileModifier tm) {
+		for(ModifierEntry me : MODIFIER_ENTRIES) {
+			if(me.getName().equals(tm.getName())) {
+				return me.getRegisterNumber();
+			}
+		}
+		return -1;
+	}
+
+	public static String getModifierName(int regNum) {
+		for(ModifierEntry me : MODIFIER_ENTRIES) {
+			if(me.getRegisterNumber() == regNum) {
+				return me.getName();
+			}
+		}
+		return regNum + " isn't registered for tile modifiers!";
 	}
 	
 	public static void printTileEntries() {

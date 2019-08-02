@@ -9,6 +9,14 @@ public class ModifierEntry {
 		filename = name;
 	}
 	
+	public int getRegisterNumber() {
+		return registerNumber;
+	}
+	
+	public String getName() {
+		return filename;
+	}
+	
 	public String toString() {
 		return "Register Number: " + registerNumber + " Filename: " + filename;
 	}

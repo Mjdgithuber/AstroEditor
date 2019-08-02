@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import panels.OptionPanel;
+import panels.TopPanel;
+import panels.WorldPane;
+
 public class GUIFrame extends JFrame {
 	
 	public static final int INITIAL_WIDTH = 753, INITIAL_HEIGHT = 698;

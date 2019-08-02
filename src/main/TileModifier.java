@@ -2,21 +2,21 @@ package main;
 
 import javax.swing.ImageIcon;
 
+import managers.TileModifierManager;
+
 public class TileModifier {
 	
 	private ImageIcon image;
 	private String name;
 	private Action action;
-	private int regNum;
 	
 //	public Tile(ImageIcon image, String name){
 //		this.image = image;
 //		this.name = name;
 //	}
 	
-	public TileModifier(String name, Action action, int regNum){
+	public TileModifier(String name, Action action){
 		setName(name, action);
-		this.regNum = regNum;
 	}
 	
 	public ImageIcon getImage(){

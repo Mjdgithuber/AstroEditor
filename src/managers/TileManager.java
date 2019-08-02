@@ -1,4 +1,4 @@
-package main;
+package managers;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 
 public class TileManager {
 	
-	public static String pathToTiles = "assets/blocks/";
+	public static final String pathToTiles = "assets/blocks/";
 	
 	private static ArrayList<ImageIcon> tileImages;
 	private static ArrayList<String> tileNames;
@@ -35,7 +35,7 @@ public class TileManager {
 		tileImages = new ArrayList<ImageIcon>();
 		tileNames = new ArrayList<String>();
 
-		final File assetFolder = new File("assets/blocks");
+		final File assetFolder = new File(pathToTiles);
 		final File[] assets = assetFolder.listFiles();
 
 		for (File f : assets){

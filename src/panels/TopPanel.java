@@ -1,4 +1,4 @@
-package main;
+package panels;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
+import main.World;
+import managers.SaveManager;
 
 public class TopPanel extends JPanel {
 	
@@ -70,7 +73,7 @@ public class TopPanel extends JPanel {
 		save.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SaveManager.initiateSave(worldPane.getTiles(), worldPane.getBuildings());
+				SaveManager.initiateSave(worldPane.getTiles(), worldPane.getTileModifiers(), worldPane.getBuildings());
 			}
 		});
 		this.add(save);

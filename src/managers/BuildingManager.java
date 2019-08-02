@@ -1,5 +1,4 @@
-package main;
-import java.awt.Image;
+package managers;
 import java.io.File;
 import java.util.ArrayList;
 

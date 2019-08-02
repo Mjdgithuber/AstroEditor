@@ -1,4 +1,4 @@
-package main;
+package managers;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -6,6 +6,11 @@ import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import main.Building;
+import main.Parser;
+import main.Tile;
+import main.TileModifier;
+import main.World;
 import register.Register;
 
 public class SaveManager {
@@ -16,7 +21,7 @@ public class SaveManager {
 		return new Parser().getWorld();
 	}
 	
-	public static final void initiateSave(Tile[][] tiles, Building[][] buildings){
+	public static final void initiateSave(Tile[][] tiles, TileModifier[][] modifiers, Building[][] buildings){
 		try {
 			JFileChooser chooser = new JFileChooser("assets/saves");
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Save Files", "sv");
@@ -30,7 +35,9 @@ public class SaveManager {
 				wr.printf("<Size width=\"%d\" height=\"%d\"></Size>\n", tiles.length, tiles[0].length);
 				for (int row=0; row<tiles[0].length; row++) {
 					for(int col=0; col<tiles.length; col++){
-						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\"></Tile>\n", tiles[col][row].getName(), Register.getTileRegisterNumber(tiles[col][row]), col, row);
+						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\" modifier_reg_num=\"%s\"></Tile>\n", 
+								tiles[col][row].getName(), Register.getTileRegisterNumber(tiles[col][row]), col, row,
+								Register.getModifierRegisterNumber(modifiers[col][row]));
 					}
 				}
 				for (int row=0; row<buildings[0].length; row++) {

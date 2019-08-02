@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.ImageIcon;
 
+import managers.TileManager;
+
 public class Tile {
 	
 	private ImageIcon image;

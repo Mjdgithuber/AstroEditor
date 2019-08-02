@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.ImageIcon;
 
+import managers.BuildingManager;
+
 public class Building {
 	
 	private ImageIcon image;
