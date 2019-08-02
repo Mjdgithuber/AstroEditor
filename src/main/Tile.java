@@ -7,11 +7,6 @@ public class Tile {
 	private ImageIcon image;
 	private String name;
 	
-//	public Tile(ImageIcon image, String name){
-//		this.image = image;
-//		this.name = name;
-//	}
-	
 	public Tile(String name){
 		setName(name);
 	}

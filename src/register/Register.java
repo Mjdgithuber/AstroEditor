@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import main.Tile;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -90,6 +92,15 @@ public class Register {
 		new RegisterParser().startParsing();
 		
 		loaded = true;
+	}
+	
+	public static int getTileRegisterNumber(Tile t) {
+		for(TileEntry te : TILE_ENTRIES) {
+			if(te.getName().equals(t.getName())) {
+				return te.getRegisterNumber();
+			}
+		}
+		return -1;
 	}
 	
 	public static void printTileEntries() {

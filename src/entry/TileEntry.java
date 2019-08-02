@@ -13,6 +13,14 @@ public class TileEntry {
 		spriteSheetY = y;
 	}
 	
+	public String getName() {
+		return filename;
+	}
+	
+	public int getRegisterNumber() {
+		return registerNumber;
+	}
+	
 	public String toString() {
 		return "Register Number: " + registerNumber + " Filename: " + filename + " X: " + spriteSheetX + " Y: " + spriteSheetY;
 	}

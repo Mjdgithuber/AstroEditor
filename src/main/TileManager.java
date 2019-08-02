@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 
 public class TileManager {
 	
+	public static String pathToTiles = "assets/blocks/";
+	
 	private static ArrayList<ImageIcon> tileImages;
 	private static ArrayList<String> tileNames;
 	
@@ -38,11 +40,15 @@ public class TileManager {
 
 		for (File f : assets){
 			try{
-				String path = f.toString();
-				if(path.endsWith("NULL.png"))
-					voidTilePath = path;
-				tileNames.add(path);				
+				String path = f.toString();					
 				tileImages.add(new ImageIcon(path));
+				
+				path = path.substring(pathToTiles.length());
+				path = path.substring(0, path.length()-4);
+				System.out.println(path);
+				if(path.endsWith("NULL"))
+					voidTilePath = path;
+				tileNames.add(path);
 			}catch(Exception e){}
 			//System.out.println(f.toString());
 		}

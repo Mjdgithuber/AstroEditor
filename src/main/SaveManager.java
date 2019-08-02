@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import register.Register;
+
 public class SaveManager {
 	
 	private SaveManager(){}
@@ -28,7 +30,7 @@ public class SaveManager {
 				wr.printf("<Size width=\"%d\" height=\"%d\"></Size>\n", tiles.length, tiles[0].length);
 				for (int row=0; row<tiles[0].length; row++) {
 					for(int col=0; col<tiles.length; col++){
-						wr.printf("<Tile name=\"%s\" x=\"%d\" y=\"%d\"></Tile>\n", tiles[col][row].getName(), col, row);
+						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\"></Tile>\n", tiles[col][row].getName(), Register.getTileRegisterNumber(tiles[col][row]), col, row);
 					}
 				}
 				for (int row=0; row<buildings[0].length; row++) {

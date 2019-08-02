@@ -11,10 +11,6 @@ public class World {
 		
 		buildings = new Building[buildingImagePaths.length][buildingImagePaths[0].length];
 		generateBuilding(buildingImagePaths);
-		
-//		tileNames = Arrays.copyOf(names, names.length);
-//		tiles = new ImageIcon[tileNames.length][tileNames[0].length];
-//		generateTileImages();
 	}
 	
 	private void generateBuilding(String[][] buildingImagePaths){
