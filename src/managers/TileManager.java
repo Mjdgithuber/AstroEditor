@@ -16,7 +16,7 @@ public class TileManager {
 	private static ArrayList<ImageIcon> tileImages;
 	private static ArrayList<String> tileNames;
 	
-	private static String voidTilePath;
+	private static String DEFAULT_TILE;
 
 	static {
 		init();
@@ -27,8 +27,8 @@ public class TileManager {
 		return tileImages.get(index);
 	}
 	
-	public static String getVoidTilePath(){
-		return voidTilePath;
+	public static String getDefaultTileName(){
+		return DEFAULT_TILE;
 	}
 
 	private static void init() {
@@ -47,7 +47,7 @@ public class TileManager {
 				path = path.substring(0, path.length()-4);
 				System.out.println(path);
 				if(path.endsWith("NULL"))
-					voidTilePath = path;
+					DEFAULT_TILE = path;
 				tileNames.add(path);
 			}catch(Exception e){}
 			//System.out.println(f.toString());

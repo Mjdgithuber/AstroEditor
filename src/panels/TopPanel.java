@@ -73,7 +73,7 @@ public class TopPanel extends JPanel {
 		save.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SaveManager.initiateSave(worldPane.getTiles(), worldPane.getTileModifiers(), worldPane.getBuildings());
+				SaveManager.initiateSave(worldPane.getTiles(), worldPane.getBuildings());
 			}
 		});
 		this.add(save);

@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import main.Action;
-import main.TileModifier;
 
 public class TileModifierManager {
 	
@@ -31,14 +30,11 @@ public class TileModifierManager {
 	private static ArrayList<ImageIcon> tileModImages;
 	private static ArrayList<String> tileModNames;
 	
-	private static String CLEAR_MOD_NAME;
-	private static String SOLID_MOD_NAME;
-	private static String TELEPORT_MOD_NAME;
-	//private static String solid_block_path;
-	//private static String transparent_block_path;
-	//private static String teleporter_block_path;
+	private static String DEFAULT_MODIFIER;
 	
-	//private static TileModifier CLEAR;
+	//private static String CLEAR_MOD_NAME;
+	//private static String SOLID_MOD_NAME;
+	//private static String TELEPORT_MOD_NAME;
 	
 	static {
 		init();
@@ -49,8 +45,8 @@ public class TileModifierManager {
 		return tileModImages.get(index);
 	}
 	
-	public static String getClearModifierPath(){
-		return CLEAR_MOD_NAME;
+	public static String getDefaultModifierName(){
+		return DEFAULT_MODIFIER;
 	}
 	
 	private static void init() {
@@ -72,13 +68,7 @@ public class TileModifierManager {
 				path = path.substring(0, path.length()-4);
 				
 				if(path.endsWith("CLEAR"))
-					CLEAR_MOD_NAME = path;
-				else if(path.endsWith("SOLID"))
-					SOLID_MOD_NAME = path;
-				else if(path.endsWith("TELEPORT"))
-					TELEPORT_MOD_NAME = path;
-				else
-					continue;
+					DEFAULT_MODIFIER = path;
 				
 				System.out.println(path);
 				tileModNames.add(path);				
@@ -95,14 +85,15 @@ public class TileModifierManager {
 		return tileModNames.get(i);
 	}
 	
+	
 	public static Action getModifierAction(String path){
-		if(path.equals(SOLID_MOD_NAME))
+		/*if(path.equals(SOLID_MOD_NAME))
 			return new Action("solid_block");
 		else if(path.equals(CLEAR_MOD_NAME))
 			return new Action("transparent_block");
 		else if(path.equals(TELEPORT_MOD_NAME)){
 			return new Action(openTeleporterDialog());
-		}
+		} */
 		
 		return null;
 	}
@@ -211,42 +202,6 @@ public class TileModifierManager {
 			}
 		});
 		teleporterDialog.add(set, gbc);
-		
-//		
-//		gbc.insets = new Insets(10,10,10,10);
-//		teleporterDialog.add(new JLabel("Width"), gbc);
-//		gbc.gridx++;
-//		SpinnerNumberModel xSpinnerModel = new SpinnerNumberModel(10, 10, 150, 1);
-//		JSpinner xSpinner = new JSpinner(xSpinnerModel);
-//		teleporterDialog.add(xSpinner, gbc);
-//		gbc.gridy++;
-//		gbc.gridx--;
-//		
-//		teleporterDialog.add(new JLabel("Height"), gbc);
-//		gbc.gridx++;
-//		SpinnerNumberModel ySpinnerModel = new SpinnerNumberModel(10, 10, 150, 1);
-//		JSpinner ySpinner = new JSpinner(ySpinnerModel);
-//		teleporterDialog.add(ySpinner, gbc);
-//		
-//		gbc.gridy++;
-//		gbc.gridwidth = 2;
-//		gbc.gridx = 0;
-////		gbc.weighty = 2;
-//		JButton select = new JButton("Select");
-////		create.addActionListener(new ActionListener(){
-////			@Override
-////			public void actionPerformed(ActionEvent e) {
-////				int width = ((Integer) xSpinner.getValue());
-////				int height = ((Integer) ySpinner.getValue());
-////				worldPane.resetWorld(new Dimension(width, height));
-////				newWorld.dispose();
-////			}
-////		});
-//		teleporterDialog.add(select, gbc);
-		
-
-		//f.repaint();
-		//newWorld.pack();
 		
 		teleporterDialog.setVisible(true);
 		

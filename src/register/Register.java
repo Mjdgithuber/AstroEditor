@@ -12,7 +12,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import main.Tile;
-import main.TileModifier;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -97,16 +96,16 @@ public class Register {
 	
 	public static int getTileRegisterNumber(Tile t) {
 		for(TileEntry te : TILE_ENTRIES) {
-			if(te.getName().equals(t.getName())) {
+			if(te.getName().equals(t.getTileName())) {
 				return te.getRegisterNumber();
 			}
 		}
 		return -1;
 	}
 	
-	public static int getModifierRegisterNumber(TileModifier tm) {
+	public static int getModifierRegisterNumber(Tile t) {
 		for(ModifierEntry me : MODIFIER_ENTRIES) {
-			if(me.getName().equals(tm.getName())) {
+			if(me.getName().equals(t.getModifierName())) {
 				return me.getRegisterNumber();
 			}
 		}

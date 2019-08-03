@@ -9,7 +9,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import main.Building;
 import main.Parser;
 import main.Tile;
-import main.TileModifier;
 import main.World;
 import register.Register;
 
@@ -21,7 +20,7 @@ public class SaveManager {
 		return new Parser().getWorld();
 	}
 	
-	public static final void initiateSave(Tile[][] tiles, TileModifier[][] modifiers, Building[][] buildings){
+	public static final void initiateSave(Tile[][] tiles, Building[][] buildings){
 		try {
 			JFileChooser chooser = new JFileChooser("assets/saves");
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Save Files", "sv");
@@ -36,8 +35,8 @@ public class SaveManager {
 				for (int row=0; row<tiles[0].length; row++) {
 					for(int col=0; col<tiles.length; col++){
 						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\" modifier_reg_num=\"%s\"></Tile>\n", 
-								tiles[col][row].getName(), Register.getTileRegisterNumber(tiles[col][row]), col, row,
-								Register.getModifierRegisterNumber(modifiers[col][row]));
+								tiles[col][row].getTileName(), Register.getTileRegisterNumber(tiles[col][row]), col, row,
+								Register.getModifierRegisterNumber(tiles[col][row]));
 					}
 				}
 				for (int row=0; row<buildings[0].length; row++) {

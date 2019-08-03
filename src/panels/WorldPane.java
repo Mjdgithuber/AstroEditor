@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 
 import main.Building;
 import main.Tile;
-import main.TileModifier;
 import main.World;
 import managers.BuildingManager;
 import managers.TileManager;
@@ -32,10 +31,9 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 	private OptionPanel op;
 	private TopPanel tp;
 
-	private final int startingSize = 10;
-	private Tile[][] tiles = new Tile[startingSize][startingSize];
-	private Building[][] buildings = new Building[startingSize][startingSize];
-	private TileModifier[][] modifiers = new TileModifier[startingSize][startingSize];
+	private final int DEFAULT_WORLD_SIZE = 10;
+	private Tile[][] tiles = new Tile[DEFAULT_WORLD_SIZE][DEFAULT_WORLD_SIZE];
+	private Building[][] buildings = new Building[DEFAULT_WORLD_SIZE][DEFAULT_WORLD_SIZE];
 //	private ImageIcon[][] tiles = new ImageIcon[10][10];
 //	private String[][] tileNames = new String[10][10];
 	private final int size = 60;
@@ -59,15 +57,14 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		tp = panel;
 	}
 	
-	public void init(){
-		if(!inited){
-			String clearModPath = TileModifierManager.getClearModifierPath();
-			for (int i = 0; i < tiles.length; i++)
+	public void init() {
+		if(!inited) {
+			for (int i = 0; i < tiles.length; i++) {
 				for (int j = 0; j < tiles[0].length; j++) {
-					tiles[i][j] = new Tile(TileManager.getVoidTilePath());
+					tiles[i][j] = new Tile(TileManager.getDefaultTileName(), TileModifierManager.getDefaultModifierName());
 					buildings[i][j] = new Building();
-					modifiers[i][j] = new TileModifier(clearModPath, TileModifierManager.getModifierAction(clearModPath));
 				}
+			}
 			inited = true;
 		}
 	}
@@ -76,10 +73,9 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		int x = size.width;
 		int y = size.height;
 		
-		// resets the arrays
+		// resets the arrays with the new size
 		tiles = new Tile[x][y];
 		buildings = new Building[x][y];
-		modifiers = new TileModifier[x][y];
 		
 		// reset offsets to make it (0,0)
 		xOffset=0;
@@ -94,23 +90,14 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		return tiles;
 	}
 	
-	public TileModifier[][] getTileModifiers() {
-		return modifiers;
-	}
-	
 	public Building[][] getBuildings(){
 		return buildings;
-	}
-	
-	public TileModifier[][] getModifiers(){
-		return modifiers;
 	}
 	
 	public void loadWorld(World w){
 		xOffset=0;
 		yOffset=0;
 		tiles = w.getTiles();
-		modifiers = w.getModifiers();
 		buildings = w.getBuildings();
 		//TODO put in modifiers
 		repaint();
@@ -154,28 +141,31 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		Graphics2D g = img.createGraphics();
 		Color oldColor = g.getColor();
 		
-		for (int i = 0; i < tiles.length; i++)
+		for (int i = 0; i < tiles.length; i++) {
 			for (int j = 0; j < tiles[0].length; j++) {
-				g.drawImage(iconToImage(tiles[i][j].getImage()), (i-xOffset) * size, (j-yOffset) * size, size,
+				g.drawImage(iconToImage(tiles[i][j].getTileImage()), (i-xOffset) * size, (j-yOffset) * size, size,
 						size, null);
 			}
+		}
 		
-		for (int i = 0; i < buildings.length; i++)
+		for (int i = 0; i < buildings.length; i++) {
 			for (int j = 0; j < buildings[0].length; j++) {
 				Building b = buildings[i][j];
 				if(!b.isNull()){
 					g.drawImage(iconToImage(buildings[i][j].getImage()), (i-xOffset) * size, (j-yOffset) * size, b.getWidth()*size,
 						b.getHeight()*size, null);
 				}
-				
 			}
+		}
 		
+		// this must be after so that it draws on top of everything else
 		if(showModifiers){
-			for (int i = 0; i < modifiers.length; i++)
-				for (int j = 0; j < modifiers[0].length; j++) {
-					g.drawImage(iconToImage(modifiers[i][j].getImage()), (i-xOffset) * size, (j-yOffset) * size, size,
+			for (int i = 0; i < tiles.length; i++) {
+				for (int j = 0; j < tiles[0].length; j++) {
+					g.drawImage(iconToImage(tiles[i][j].getModifierImage()), (i-xOffset) * size, (j-yOffset) * size, size,
 							size, null);
 				}
+			}
 		}
 
 		if(showLines){
@@ -215,7 +205,7 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 			//System.out.println(cellX + " " + cellY);
 			switch(op.getTool()){
 				case "Block": {
-					tiles[cellX][cellY].setName(op.getCurrentAssetName());
+					tiles[cellX][cellY].setTileName(op.getCurrentAssetName());
 					break;
 				}
 				case "Building": {
@@ -226,7 +216,7 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 					break;
 				}
 				case "Tile_Modifier": {
-					modifiers[cellX][cellY].setName(op.getCurrentAssetName(), op.getCurrentAction());
+					tiles[cellX][cellY].setModifierName(op.getCurrentAssetName());
 					break;
 				}
 			}
