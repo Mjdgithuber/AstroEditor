@@ -1,6 +1,5 @@
 package panels;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -8,18 +7,14 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.Action;
 import managers.BuildingManager;
 import managers.TileManager;
 import managers.TileModifierManager;
@@ -29,7 +24,6 @@ public class OptionPanel extends JPanel {
 	GridBagConstraints gbc = new GridBagConstraints();
 	private String name = null;
 	private String tool;
-	private Action action;
 	
 	private final Color DEFUALT_COLOR = new JButton().getBackground();
 	private final Color SELECTED_COLOR = Color.GREEN;
@@ -57,7 +51,6 @@ public class OptionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = typeList.getSelectedIndex();
 				name = null;
-				action = null;
 				switch(index){
 					case 0: {
 						tool = "Block";
@@ -78,17 +71,14 @@ public class OptionPanel extends JPanel {
 		});
 		add(typeList, gbc);
 		
-		for(int i = 0; i<TileManager.getNumberOfBlocks(); i++){
+		for(int i = 0; i<TileManager.getNumberOfBlocks(); i++)
 			addButton(getScaledImage(TileManager.getTileImage(i)), TileManager.getTileName(i), "Blocks");
-		}
 		
-		for(int i = 0; i<BuildingManager.getNumberOfBuildings(); i++){
+		for(int i = 0; i<BuildingManager.getNumberOfBuildings(); i++)
 			addButton(getScaledImage(BuildingManager.getBuildingImage(i)), BuildingManager.getBlockName(i), "Buildings");
-		}
 		
-		for(int i = 0; i<TileModifierManager.getNumberOfModifiers(); i++){
+		for(int i = 0; i<TileModifierManager.getNumberOfModifiers(); i++)
 			addButton(getScaledImage(TileModifierManager.getModifierImage(i)), TileModifierManager.getModifierName(i), "Tile_Modifiers");
-		}
 		
 		hideButtonsBut("Blocks");
 	}
@@ -102,10 +92,6 @@ public class OptionPanel extends JPanel {
 	
 	public String getTool(){
 		return tool;
-	}
-	
-	public Action getCurrentAction(){
-		return action;
 	}
 	
 	public String getCurrentAssetName(){
@@ -158,7 +144,7 @@ public class OptionPanel extends JPanel {
 	public void addButton(ImageIcon image, String buttonName, String type){
 		gbc.gridx = 0;
 		gbc.gridy += 1;
-		gbc.anchor = gbc.CENTER;
+		gbc.anchor = GridBagConstraints.CENTER;
 		
 		JButton b = new JButton(image);
 		
@@ -182,19 +168,12 @@ public class OptionPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				//img = image;
 				name = buttonName;
-				if(modifierButtons.contains(b))
-					action = TileModifierManager.getModifierAction(buttonName);
-				else
-					action = null;
-				System.out.println(action);
+
 				resetButtonColors();
 				b.setBackground(SELECTED_COLOR);
 			}
 		});
 
-		
-		
-		//buttons.add(b);
 		add(b, gbc);
 	}
 	

@@ -200,8 +200,8 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 		requestFocusInWindow();
 		
 		if(!op.isSelectionNull()){
-			int cellX = e.getX()/size + xOffset;
-			int cellY = e.getY()/size + yOffset;
+			int cellX = e.getX() / size + xOffset;
+			int cellY = e.getY() / size + yOffset;
 			//System.out.println(cellX + " " + cellY);
 			switch(op.getTool()){
 				case "Block": {
@@ -216,7 +216,13 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 					break;
 				}
 				case "Tile_Modifier": {
+					System.out.println(op.getCurrentAssetName());
 					tiles[cellX][cellY].setModifierName(op.getCurrentAssetName());
+					
+					if(op.getCurrentAssetName().equals(TileModifierManager.getExternalModifierName()))
+						TileModifierManager.openScriptDialog();
+					//System.out.println(tiles[cellX][cellY].);
+					
 					break;
 				}
 			}

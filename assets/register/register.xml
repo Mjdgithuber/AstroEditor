@@ -2,7 +2,7 @@
     <ModifierRegister>
         <Modifier reg_num="0" name="SOLID"></Modifier>
         <Modifier reg_num="1" name="CLEAR"></Modifier>
-        <Modifier reg_num="2" name="TELEPORT"></Modifier>
+        <Modifier reg_num="2" name="EXTERNAL"></Modifier>
     </ModifierRegister>
     <TileRegister>
         <Tile reg_num="0" name="NULL" spritesheet_x="0" spritesheet_y="0"></Tile>

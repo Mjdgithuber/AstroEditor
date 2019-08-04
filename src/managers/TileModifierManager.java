@@ -21,8 +21,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import main.Action;
-
 public class TileModifierManager {
 	
 	public static final String pathToModifiers = "assets/tile_modifiers/";
@@ -31,6 +29,7 @@ public class TileModifierManager {
 	private static ArrayList<String> tileModNames;
 	
 	private static String DEFAULT_MODIFIER;
+	private static String EXTERNAL_MODIFIER;
 	
 	//private static String CLEAR_MOD_NAME;
 	//private static String SOLID_MOD_NAME;
@@ -47,6 +46,10 @@ public class TileModifierManager {
 	
 	public static String getDefaultModifierName(){
 		return DEFAULT_MODIFIER;
+	}
+	
+	public static String getExternalModifierName() {
+		return EXTERNAL_MODIFIER;
 	}
 	
 	private static void init() {
@@ -69,6 +72,8 @@ public class TileModifierManager {
 				
 				if(path.endsWith("CLEAR"))
 					DEFAULT_MODIFIER = path;
+				else if(path.endsWith("EXTERNAL"))
+					EXTERNAL_MODIFIER = path;
 				
 				System.out.println(path);
 				tileModNames.add(path);				
@@ -85,19 +90,6 @@ public class TileModifierManager {
 		return tileModNames.get(i);
 	}
 	
-	
-	public static Action getModifierAction(String path){
-		/*if(path.equals(SOLID_MOD_NAME))
-			return new Action("solid_block");
-		else if(path.equals(CLEAR_MOD_NAME))
-			return new Action("transparent_block");
-		else if(path.equals(TELEPORT_MOD_NAME)){
-			return new Action(openTeleporterDialog());
-		} */
-		
-		return null;
-	}
-	
 	private static JPanel levelPanel(){
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -105,42 +97,42 @@ public class TileModifierManager {
 		
 		gbc.gridy=0;
 		gbc.gridx=0;
-		panel.add(new JLabel("Level File: "), gbc);
+		panel.add(new JLabel("Script Location: "), gbc);
 		gbc.gridx++;
 		JTextField text = new JTextField();
 		text.setPreferredSize(new Dimension(135, 25));
 		panel.add(text, gbc);
 		
-		gbc.gridx--;
-		gbc.gridy++;
-		panel.add(new JLabel("Spawn X: "), gbc);
-		gbc.gridx++;
-		SpinnerNumberModel xSpinnerModel = new SpinnerNumberModel(0, 0, 149, 1);
-		JSpinner xSpinner = new JSpinner(xSpinnerModel);
-		panel.add(xSpinner, gbc);
-		gbc.gridx--;
+		//gbc.gridx--;
+		//gbc.gridy++;
+		//panel.add(new JLabel("Spawn X: "), gbc);
+		//gbc.gridx++;
+		//SpinnerNumberModel xSpinnerModel = new SpinnerNumberModel(0, 0, 149, 1);
+		//JSpinner xSpinner = new JSpinner(xSpinnerModel);
+		//panel.add(xSpinner, gbc);
+		//gbc.gridx--;
 		
-		gbc.gridy++;
-		panel.add(new JLabel("Spawn Y: "), gbc);
-		gbc.gridx++;
-		SpinnerNumberModel ySpinnerModel = new SpinnerNumberModel(0, 0, 149, 1);
-		JSpinner ySpinner = new JSpinner(ySpinnerModel);
-		panel.add(ySpinner, gbc);
+		//gbc.gridy++;
+		//panel.add(new JLabel("Spawn Y: "), gbc);
+		//gbc.gridx++;
+		//SpinnerNumberModel ySpinnerModel = new SpinnerNumberModel(0, 0, 149, 1);
+		//JSpinner ySpinner = new JSpinner(ySpinnerModel);
+		//panel.add(ySpinner, gbc);
 		
-		gbc.gridx--;
+		//gbc.gridx--;
 		
 		return panel;
 	}
 	
-	private static String action;
-	private static String openTeleporterDialog(){
-		action = null;
+	static String script = null;
+	public static String openScriptDialog() {
+		
 		
 		JDialog teleporterDialog;
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		JFrame f = new JFrame();
-		teleporterDialog = new JDialog(f, "New Teleporter", true);
+		teleporterDialog = new JDialog(f, "New External Script", true);
 		
 		teleporterDialog.setMinimumSize(new Dimension(250, 200));
 		teleporterDialog.setResizable(false);
@@ -149,22 +141,21 @@ public class TileModifierManager {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
-		//gbc.weighty = 1;
-		gbc.anchor=GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.CENTER;
 		
 		teleporterDialog.setAlwaysOnTop(true);
 		teleporterDialog.setLocationRelativeTo(null);
 		
 		gbc.gridwidth = 1;
-		teleporterDialog.add(new JLabel("Type:"), gbc);
-		gbc.gridx++;
-		String[] typeStrings = {"Level", "Shop", "Hospital", "Battle"};
-		JComboBox<String> typeList = new JComboBox<String>(typeStrings);
-		typeList.setSelectedIndex(0);
-		teleporterDialog.add(typeList, gbc);
+		//teleporterDialog.add(new JLabel("Type:"), gbc);
+		//gbc.gridx++;
+		//String[] typeStrings = {"Level", "Shop", "Hospital", "Battle"};
+		//JComboBox<String> typeList = new JComboBox<String>(typeStrings);
+		//typeList.setSelectedIndex(0);
+		//teleporterDialog.add(typeList, gbc);
 		
-		gbc.gridx--;
-		gbc.gridy++;
+		//gbc.gridx--;
+		//gbc.gridy++;
 		gbc.gridwidth = 2;
 		JPanel levelPanel = levelPanel();
 		teleporterDialog.add(levelPanel, gbc);
@@ -174,30 +165,8 @@ public class TileModifierManager {
 		set.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String ending = "";
-				
-				switch(typeList.getSelectedIndex()){
-					case 0: { // level
-						Component[] comps = levelPanel.getComponents();
-						
-						ending += "_"+((JTextField)comps[1]).getText()+"_"+
-								((JSpinner)comps[3]).getValue()+"_"+
-								((JSpinner)comps[5]).getValue();
-						break;
-					}
-					case 1: { // shop
-						break;
-					}
-					case 2: { // hospital
-						break;
-					}
-					case 3: { // battle
-						break;
-					}
-				}
-				
-				action = "teleporter_block_" + ((String)typeList.getSelectedItem()).toLowerCase()
-						+ ending;
+				script = ((JTextField)levelPanel.getComponents()[0]).getText();
+
 				teleporterDialog.dispose();
 			}
 		});
@@ -205,12 +174,10 @@ public class TileModifierManager {
 		
 		teleporterDialog.setVisible(true);
 		
-		return action;
+		return script;
 	}
 	
 	public static int getNumberOfModifiers(){
 		return tileModImages.size();
 	}
-	
-
 }
