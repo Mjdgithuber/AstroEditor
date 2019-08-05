@@ -3,10 +3,8 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.io.File;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import panels.OptionPanel;
@@ -15,6 +13,11 @@ import panels.WorldPane;
 
 public class GUIFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5870013814009597738L;
+
 	public static final int INITIAL_WIDTH = 753, INITIAL_HEIGHT = 698;
 	
 	private OptionPanel optionPanel;

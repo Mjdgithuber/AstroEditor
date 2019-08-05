@@ -14,7 +14,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -23,6 +22,10 @@ import managers.SaveManager;
 
 public class TopPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2408131477871474596L;
 	GridBagConstraints gbc = new GridBagConstraints();
 	private WorldPane worldPane;
 	private JDialog newWorld;
@@ -34,9 +37,6 @@ public class TopPanel extends JPanel {
 		
 		this.setSize(new Dimension(50, 50));
 		setBorder(BorderFactory.createTitledBorder("Options"));
-//		this.add(new JRadioButton("Solid"));
-//		this.add(new JRadioButton("Transparent"));
-//		this.add(new JRadioButton("Transporter"));
 		xCoord = new JLabel("X: 0");
 		yCoord = new JLabel("Y: 0");
 		this.add(xCoord);
@@ -114,8 +114,6 @@ public class TopPanel extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
-		//gbc.weighty = 1;
-//		gbc.fill=GridBagConstraints.BOTH;
 		gbc.anchor=GridBagConstraints.CENTER;
 		
 		newWorld.setAlwaysOnTop(true);
@@ -144,7 +142,6 @@ public class TopPanel extends JPanel {
 		gbc.gridy++;
 		gbc.gridwidth = 2;
 		gbc.gridx = 0;
-//		gbc.weighty = 2;
 		JButton create = new JButton("Create");
 		create.addActionListener(new ActionListener(){
 			@Override
@@ -156,10 +153,6 @@ public class TopPanel extends JPanel {
 			}
 		});
 		newWorld.add(create, gbc);
-		
-
-		//f.repaint();
-		//newWorld.pack();
 		
 		newWorld.setVisible(true);
 	}

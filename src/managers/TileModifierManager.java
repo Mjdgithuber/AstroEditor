@@ -1,10 +1,8 @@
 package managers;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -12,14 +10,11 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 
 public class TileModifierManager {
@@ -31,11 +26,7 @@ public class TileModifierManager {
 	
 	private static String DEFAULT_MODIFIER;
 	private static String EXTERNAL_MODIFIER;
-	
-	//private static String CLEAR_MOD_NAME;
-	//private static String SOLID_MOD_NAME;
-	//private static String TELEPORT_MOD_NAME;
-	
+
 	static {
 		init();
 	}

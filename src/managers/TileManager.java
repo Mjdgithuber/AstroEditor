@@ -1,12 +1,7 @@
 package managers;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class TileManager {
@@ -50,7 +45,6 @@ public class TileManager {
 					DEFAULT_TILE = path;
 				tileNames.add(path);
 			}catch(Exception e){}
-			//System.out.println(f.toString());
 		}
 	}
 	
@@ -61,15 +55,7 @@ public class TileManager {
 	public static String getTileName(int i){
 		return tileNames.get(i);
 	}
-	
-//	public static ImageIcon getBlockImage(int i, int width, int height){
-//		ImageIcon imageIcon = tileImages.get(i); // load the image to a imageIcon
-//		Image image = imageIcon.getImage(); // transform it 
-//		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//		imageIcon = new ImageIcon(newimg);
-//		return imageIcon;
-//	}
-//	
+
 	public static int getNumberOfBlocks(){
 		return tileImages.size();
 	}

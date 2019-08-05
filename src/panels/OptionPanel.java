@@ -21,6 +21,10 @@ import managers.TileModifierManager;
 
 public class OptionPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2049232870748567521L;
 	GridBagConstraints gbc = new GridBagConstraints();
 	private String name = null;
 	private String tool;

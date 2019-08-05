@@ -1,8 +1,5 @@
 package main;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
@@ -18,7 +15,6 @@ public class Parser extends DefaultHandler {
 
 	private World world;
 
-	
 	public Parser() {
 		try{
 			SAXParserFactory parserFactor = SAXParserFactory.newInstance();
@@ -85,22 +81,6 @@ public class Parser extends DefaultHandler {
 				break;
 			}
 		}
-	}
-	
-	@Override
-	// An end tag is encountered.
-	public void endElement(String uri, String localName, String qName) throws SAXException {
-		switch (qName) {
-//			case "Graph": {
-//				break;
-//			}
-		}
-	}
-	
-	@Override
-	// This is the data between tags.
-	public void characters(char[] ch, int start, int length) throws SAXException {
-//			text = String.copyValueOf(ch, start, length).trim();
 	}
 }
 

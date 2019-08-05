@@ -28,14 +28,16 @@ import managers.TileModifierManager;
 
 public class WorldPane extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6883698212536972527L;
 	private OptionPanel op;
 	private TopPanel tp;
 
 	private final int DEFAULT_WORLD_SIZE = 10;
 	private Tile[][] tiles = new Tile[DEFAULT_WORLD_SIZE][DEFAULT_WORLD_SIZE];
 	private Building[][] buildings = new Building[DEFAULT_WORLD_SIZE][DEFAULT_WORLD_SIZE];
-//	private ImageIcon[][] tiles = new ImageIcon[10][10];
-//	private String[][] tileNames = new String[10][10];
 	private final int size = 60;
 	private boolean inited;
 	private boolean showLines, showModifiers;
@@ -222,7 +224,6 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 					
 					if(op.getCurrentAssetName().equals(TileModifierManager.getExternalModifierName()))
 						t.setScriptPath(TileModifierManager.openScriptDialog(t.getScriptPath()));
-					//System.out.println(tiles[cellX][cellY].);
 					
 					break;
 				}
