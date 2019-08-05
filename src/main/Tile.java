@@ -31,7 +31,7 @@ public class Tile {
 	public Tile(String tileName, String modifierName){
 		setTileName(tileName);
 		setModifierName(modifierName);
-		scriptPath = "undefined";
+		scriptPath = "";
 	}
 	
 	/** 

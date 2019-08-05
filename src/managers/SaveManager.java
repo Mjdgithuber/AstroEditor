@@ -34,9 +34,9 @@ public class SaveManager {
 				wr.printf("<Size width=\"%d\" height=\"%d\"></Size>\n", tiles.length, tiles[0].length);
 				for (int row=0; row<tiles[0].length; row++) {
 					for(int col=0; col<tiles.length; col++){
-						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\" modifier_reg_num=\"%s\"></Tile>\n", 
+						wr.printf("<Tile name=\"%s\" reg_num=\"%d\" x=\"%d\" y=\"%d\" modifier_reg_num=\"%s\" script=\"%s\"></Tile>\n", 
 								tiles[col][row].getTileName(), Register.getTileRegisterNumber(tiles[col][row]), col, row,
-								Register.getModifierRegisterNumber(tiles[col][row]));
+								Register.getModifierRegisterNumber(tiles[col][row]), tiles[col][row].getScriptPath());
 					}
 				}
 				for (int row=0; row<buildings[0].length; row++) {

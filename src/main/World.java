@@ -8,9 +8,9 @@ public class World {
 	private Building[][] buildings;
 	
 	
-	public World(String[][] tileImagePaths, String[][] tileModifierPaths, String[][] buildingImagePaths){
+	public World(String[][] tileImagePaths, String[][] tileModifierPaths, String[][] tileScriptPaths, String[][] buildingImagePaths){
 		tiles = new Tile[tileImagePaths.length][tileImagePaths[0].length];
-		generateTiles(tileImagePaths, tileModifierPaths);
+		generateTiles(tileImagePaths, tileModifierPaths, tileScriptPaths);
 		
 		buildings = new Building[buildingImagePaths.length][buildingImagePaths[0].length];
 		generateBuilding(buildingImagePaths);
@@ -28,10 +28,10 @@ public class World {
 				
 	}
 	
-	private void generateTiles(String[][] tileImagePaths, String[][] modifierPaths){
+	private void generateTiles(String[][] tileImagePaths, String[][] modifierPaths, String[][] tileScriptPaths){
 		for(int i = 0; i<tileImagePaths.length; i++)
 			for(int j = 0; j<tileImagePaths[0].length; j++)
-				tiles[i][j] = new Tile(tileImagePaths[i][j], modifierPaths[i][j]);
+				tiles[i][j] = new Tile(tileImagePaths[i][j], modifierPaths[i][j], tileScriptPaths[i][j]);
 	}
 	
 	public Building[][] getBuildings(){

@@ -35,7 +35,7 @@ public class Parser extends DefaultHandler {
 				for(String s : n)
 					System.out.println(s);
 			
-			world = new World(tileNames, tileModifiers, buildingNames);
+			world = new World(tileNames, tileModifiers, tileScripts, buildingNames);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -49,6 +49,7 @@ public class Parser extends DefaultHandler {
 
 	private String[][] tileNames = null;
 	private String[][] tileModifiers = null;
+	private String[][] tileScripts = null;
 	private String[][] buildingNames = null;
 	@Override
 	// A start tag is encountered.
@@ -63,6 +64,7 @@ public class Parser extends DefaultHandler {
 				int height = Integer.parseInt(attributes.getValue("height"));
 				tileNames = new String[width][height];
 				tileModifiers = new String[width][height];
+				tileScripts = new String[width][height];
 				buildingNames = new String[width][height];
 				break;
 			}
@@ -73,6 +75,7 @@ public class Parser extends DefaultHandler {
 				tileModifiers[x][y] = Register.getModifierName(modRegNum);
 				System.out.println(tileModifiers[x][y]);
 				tileNames[x][y] = attributes.getValue("name");
+				tileScripts[x][y] = attributes.getValue("script");
 				break;
 			}
 			case "Building": {

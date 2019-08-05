@@ -217,10 +217,11 @@ public class WorldPane extends JPanel implements MouseListener, MouseMotionListe
 				}
 				case "Tile_Modifier": {
 					System.out.println(op.getCurrentAssetName());
-					tiles[cellX][cellY].setModifierName(op.getCurrentAssetName());
+					Tile t = tiles[cellX][cellY];
+					t.setModifierName(op.getCurrentAssetName());
 					
 					if(op.getCurrentAssetName().equals(TileModifierManager.getExternalModifierName()))
-						TileModifierManager.openScriptDialog();
+						t.setScriptPath(TileModifierManager.openScriptDialog(t.getScriptPath()));
 					//System.out.println(tiles[cellX][cellY].);
 					
 					break;
